@@ -1,0 +1,153 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Custom URL Shortener</title>
+
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css" media="screen">
+	<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="screen">
+</head>
+
+<body class="pace-done is_index_lout">
+	<main id="content" role="main">
+		<section class="container-fluid mx-0 bg_cuttly_main_092021">
+			<div class="header__bg"></div>
+			<div class="mb-0">
+				<div class="container position-relative">
+					<div class="row">
+						<div class="dv_main col-md-6 cutt_main_b2">
+							<h2 class="h1">URL Shortener</h2>
+							<h3 class="h2 h2_index text-left text-white">All the features you need in one place. <br />
+								Shorten, manage and track your links the easy way.</h3>
+							<div class="butt_on mx-auto">
+								<a href="#shorten" class="btn_m_l btn_m_l_1">Shorten</a>
+								<a href="/all-analytics" class="btn_m_l btn_m_r" target="_new">Analytics</a>
+							</div>
+						</div>
+						<div class="col-md-6 mobile_bg text-right">
+							<img src="{% static 'Rebrandly.png' %}" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg_main" id="shorten" style="padding-bottom: 5%;">
+			<div class="container cutt_main_inp">
+				<div class="row">
+					<div class="col-12 mt-4 py-2 mb-2">
+						<form method="post" id="form_input">
+							{% csrf_token %}
+							<div class="input-group">
+								<input type="url" class="cutt_url w-50 p-4 rounded-12"
+									placeholder="Paste long url and shorten it" name="longurl" required />
+
+								<input type="text" class="cutt_url w-25 p-4 rounded-12" placeholder="alias"
+									name="custom_name" style="margin-left: 5%;" />
+
+								<button class="btn_cutt rounded-6 shortenit_b" role="button">Shorten</button>
+							</div>
+						</form>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-12 mt-4 py-2 mb-2" style="text-align: center; color: red;">
+						<p>The alias name is already taken</p>
+					</div>
+				</div>
+
+			</div>
+
+			<div id="results">
+				<div class="container">
+					<div class="row py-4">
+						<div class="col-12 result">
+							<div class="url_options rounded-6" id="0">
+								<p class="data_link">April 2, 2022</p>
+								<p class="url_link">
+									https://www.codechef.com/ratings/all?filterBy=Country%3DIndia&itemsPerPage=15&order=asc&page=1&sortBy=global_rank
+
+								</p>
+								<p id="link" class="link_element">
+									<a href="https://rr-url.herokuapp.com/cc-ranklist" class="short_url_l" target="_blank">https://rr-url.herokuapp.com/cc-ranklist</a>
+								</p>
+								<button class="btn-cutt i_s" onclick="copyToClipboard()" data-toggle="tooltip"
+									data-html="true" data-placement="top" title="" data-original-title="Copy">
+									<img src="{% static 'copy-icon.png' %}" />
+								</button>
+								<a href="/analytics/cc-ranklist" class="btn-cutt click_stats">
+									<svg class="i_svg" viewBox="0 0 24 24">
+										<use xlink:href="#i_chart"></use>
+									</svg>
+									<span>
+										<b class="badge">0</b>clicks
+									</span>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="container" id="alert-box" style="display: none">
+				<div class="row py-4">
+					<div class="col-9"></div>
+					<div class="col-3">
+						<div class="alert alert-success">
+							<strong>Copied to clipboard!</strong>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<footer class="footer-area footer--light">
+			<div class="mini-footer">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-12">
+							<div class="copyright-text">
+								<p><a href="https://www.o1codingclub.in/">O(1) Coding Club</a></p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</main>
+
+	<script type="text/javascript">
+		function copyToClipboard() {
+			const element = document.getElementById("link");
+			console.log(element.innerText);
+
+			const el = document.createElement('textarea');
+			el.value = element.innerText;
+			el.setAttribute('readonly', '');
+			el.style.position = 'absolute';
+			el.style.left = '-9999px';
+			document.body.appendChild(el);
+			const selected =
+			document.getSelection().rangeCount > 0
+			? document.getSelection().getRangeAt(0)
+			: false;
+			el.select();
+			document.execCommand('copy');
+			document.body.removeChild(el);
+
+			document.getElementById("alert-box").style.display = "block"
+			setTimeout(() => {
+				document.getElementById("alert-box").style.display = "none"
+			}, 1500);
+			;
+		}
+	</script>
+</body>
+
+</html>
