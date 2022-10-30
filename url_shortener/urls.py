@@ -4,5 +4,7 @@ from . import views
 urlpatterns = [
     path('hello',views.hello_world),
     path('task',views.task),
-    path('',views.home_page)
+    path('',views.home_page),
+    path('analytics',views.analytics),
+    path('<slug:customname>',views.redirect_url)
 ]

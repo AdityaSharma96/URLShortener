@@ -26,7 +26,7 @@
 								Shorten, manage and track your links the easy way.</h3>
 							<div class="butt_on mx-auto">
 								<a href="#shorten" class="btn_m_l btn_m_l_1">Shorten</a>
-								<a href="/all-analytics" class="btn_m_l btn_m_r" target="_new">Analytics</a>
+								<a href="/analytics" class="btn_m_l btn_m_r" target="_new">Analytics</a>
 							</div>
 						</div>
 						<div class="col-md-6 mobile_bg text-right">
@@ -56,26 +56,34 @@
 					</div>
 				</div>
 
+
+				{% if error %}		
 				<div class="row">
 					<div class="col-12 mt-4 py-2 mb-2" style="text-align: center; color: red;">
 						<p>The alias name is already taken</p>
 					</div>
 				</div>
+				{% endif %}
+
+
 
 			</div>
 
+
+
+			{% if submitted %}
 			<div id="results">
 				<div class="container">
 					<div class="row py-4">
 						<div class="col-12 result">
 							<div class="url_options rounded-6" id="0">
-								<p class="data_link">April 2, 2022</p>
+								<p class="data_link">{{date}}</p>
 								<p class="url_link">
-									https://www.codechef.com/ratings/all?filterBy=Country%3DIndia&itemsPerPage=15&order=asc&page=1&sortBy=global_rank
+									{{long_url}}
 
 								</p>
 								<p id="link" class="link_element">
-									<a href="https://rr-url.herokuapp.com/cc-ranklist" class="short_url_l" target="_blank">https://rr-url.herokuapp.com/cc-ranklist</a>
+									<a href="{{custom_name}}" class="short_url_l" target="_blank">{{custom_name}}</a>
 								</p>
 								<button class="btn-cutt i_s" onclick="copyToClipboard()" data-toggle="tooltip"
 									data-html="true" data-placement="top" title="" data-original-title="Copy">
@@ -86,7 +94,7 @@
 										<use xlink:href="#i_chart"></use>
 									</svg>
 									<span>
-										<b class="badge">0</b>clicks
+										<b class="badge">{{clicks}}</b>clicks
 									</span>
 								</a>
 							</div>
@@ -94,6 +102,9 @@
 					</div>
 				</div>
 			</div>
+			{% endif %}
+
+
 
 			<div class="container" id="alert-box" style="display: none">
 				<div class="row py-4">

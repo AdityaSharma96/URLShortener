@@ -1,0 +1,48 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en" class="">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<title>Custom URL Shortener</title>
+
+	<link rel="stylesheet" href="{% static 'bootstrap.min.css' %}" type="text/css" media="screen">
+	<link rel="stylesheet" href="{% static 'style.css' %}" type="text/css" media="screen">
+</head>
+
+<body class="pace-done lout_stats30">
+	<main id="content" role="main" class="wyniki wyniki_all">
+		<div class="container">
+			<div class="row">
+				<div class="col-12 page_log_in mt-0">
+					<h2 class="h1" style="text-align: center;">All Links Analytics</h2>
+				</div>
+
+				{% for obj in rows %}
+
+				<div class="url_options url_stats_o" id="1">
+					<p class="data_link">{{ obj.created_date }}</p>
+					<p class="url_link">
+						{{ obj.long_url }}
+					</p>
+					<p id="link" class="link_element">
+						<a href="/redirect/{{ obj.custom_name }}" class="short_url_l" target="blank">
+							{{ obj.custom_name }}</a>
+					</p>
+					<div class="stats_total btn-cutt click_stats btn_norm">
+						<div>Total clicks <strong class="allClicks">{{ obj.visit_count }}</strong></div>
+					</div>
+				</div>
+
+				{% endfor %}
+
+			</div>
+		</div>
+	</main>
+
+</body>
+
+</html>
